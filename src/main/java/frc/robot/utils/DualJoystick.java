@@ -2,6 +2,7 @@ package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedController;
 
 public class DualJoystick extends GenericHID {
 
@@ -15,12 +16,24 @@ public class DualJoystick extends GenericHID {
 
 	}
 
+	public Joystick getRighJoystick() {
+		return right;
+	}
+
 	public double getRightRawAxis(int axis) {
-		return right.getRawAxis(axis);
+		return this.calculateDeadzone(right.getRawAxis(axis));
 	}
 
 	public double getLeftRawAxis(int axis) {
-		return left.getRawAxis(axis);
+		return this.calculateDeadzone(left.getRawAxis(axis));
 
+	}
+
+	private double calculateDeadzone(double speed) {
+		return Math.abs(speed) > Constants.DualJoystick.DEADZONE ? speed : 0;
+	}
+
+	public double getSlowMode() {
+		return (this.getRightRawAxis(Constants.DualJoystick.DIAL) * -1 + 1) / 2;
 	}
 }

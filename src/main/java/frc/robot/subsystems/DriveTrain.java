@@ -8,8 +8,10 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.DriveTrain.DriveMode;
 
 public class DriveTrain extends SubsystemBase {
   // declare our variables
@@ -18,7 +20,7 @@ public class DriveTrain extends SubsystemBase {
   private TalonSRX backL;
   private TalonSRX backR;
 
-  private boolean slowModeOn = true;
+  private DriveMode driveMode = DriveMode.ArcadeDrive;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
@@ -46,12 +48,27 @@ public class DriveTrain extends SubsystemBase {
   public void periodic() {
   }
 
-  public void tankDrive(double leftSpeed, double rightSpeed) {
+  public void drive(double leftSpeed, double rightSpeed) {
+    switch (driveMode) {
+      case ArcadeDrive:
+        this.arcadeDrive(leftSpeed, rightSpeed);
+        break;
+      case TankDrive:
+        this.tankDrive(leftSpeed, rightSpeed);
+        break;
+      default:
+        this.arcadeDrive(leftSpeed, rightSpeed);
+
+        break;
+    }
+  }
+
+  private void tankDrive(double leftSpeed, double rightSpeed) {
     frontL.set(ControlMode.PercentOutput, leftSpeed);
     frontR.set(ControlMode.PercentOutput, rightSpeed);
   }
 
-  public void arcadeDrive(double x, double y) {
+  private void arcadeDrive(double x, double y) {
     frontL.set(ControlMode.PercentOutput, y - x);
     frontR.set(ControlMode.PercentOutput, y + x);
   }
@@ -61,12 +78,11 @@ public class DriveTrain extends SubsystemBase {
     frontR.set(ControlMode.PercentOutput, 0.0);
   }
 
-  public void setSlowMode(boolean slowModeOn) {
-    this.slowModeOn = slowModeOn;
+  public DriveMode getDriveMode() {
+    return driveMode;
   }
 
-  public boolean getSlowMode() {
-    return slowModeOn;
+  public void setDriveMode(DriveMode driveMode) {
+    this.driveMode = driveMode;
   }
-
 }

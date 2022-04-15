@@ -11,13 +11,18 @@ public final class Constants {
 
     public final static class DriveTrain {
         public static final double SLOW_MODE = 0.3;
-
+        public  static enum DriveMode {
+            ArcadeDrive, TankDrive
+        }
     }
+
+
 
     public final static class DualJoystick {
         public static final int X_AXIS = 0;
         public static final int Y_AXIS = 1;
         public static final int DIAL = 2;
+        public static final double DEADZONE = 0.2;
 
     }
 }
