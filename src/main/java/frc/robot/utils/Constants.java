@@ -9,6 +9,12 @@ public final class Constants {
         public static final int DRIVETRAIN_BACK_RIGHT = 3;
     }
 
+    public final static class AirplaneLauncher {
+        public static final int RIGHT = 5;
+        public static final int LEFT = 6;
+
+    }
+
     public final static class DriveTrain {
         public static final double SLOW_MODE = 0.3;
         public  static enum DriveMode {

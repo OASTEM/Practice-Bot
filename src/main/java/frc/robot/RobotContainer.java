@@ -5,6 +5,8 @@
 package frc.robot;
 
 import frc.robot.commands.Drive;
+import frc.robot.commands.ShootAirplane;
+import frc.robot.subsystems.AirplaneLauncher;
 import frc.robot.subsystems.DriveTrain;
 
 import frc.robot.utils.DualJoystick;
@@ -17,9 +19,13 @@ public class RobotContainer {
   private DriveTrain driveTrain = new DriveTrain();
 
   private final DualJoystick joysticks = new DualJoystick(0, 1);
-  private final JoystickButton driveModeButton_1 = new JoystickButton(joysticks.getRighJoystick(), 8);
+  private final JoystickButton button8 = new JoystickButton(joysticks.getRighJoystick(), 8);
+  private final JoystickButton button1 = new JoystickButton(joysticks.getRighJoystick(), 1);
+
+  private final AirplaneLauncher airplaneLauncher = new AirplaneLauncher();
 
   private final Drive drive = new Drive(driveTrain, joysticks);
+  private final ShootAirplane shootAirplane = new ShootAirplane(airplaneLauncher);
 
   public RobotContainer() {
     driveTrain.setDriveMode(DriveMode.ArcadeDrive);
@@ -29,7 +35,8 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    driveModeButton_1.whenPressed(new InstantCommand(() -> this.changeDriveMode()));
+    button8.whenPressed(new InstantCommand(() -> this.changeDriveMode()));
+    button1.whenPressed(shootAirplane);
 
   }
 
