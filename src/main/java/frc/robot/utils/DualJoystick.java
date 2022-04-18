@@ -2,7 +2,6 @@ package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SpeedController;
 
 public class DualJoystick extends GenericHID {
 
