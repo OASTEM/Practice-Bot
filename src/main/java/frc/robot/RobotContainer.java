@@ -25,7 +25,7 @@ public class RobotContainer {
   private final AirplaneLauncher airplaneLauncher = new AirplaneLauncher();
 
   private final Drive drive = new Drive(driveTrain, joysticks);
-  private final ShootAirplane shootAirplane = new ShootAirplane(airplaneLauncher);
+  private final ShootAirplane shootAirplane = new ShootAirplane(airplaneLauncher, joysticks);
 
   public RobotContainer() {
     driveTrain.setDriveMode(DriveMode.ArcadeDrive);

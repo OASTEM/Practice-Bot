@@ -19,9 +19,9 @@ public class AirplaneLauncher extends SubsystemBase {
 
   }
 
-  public void shoot() {
-    right.set(ControlMode.PercentOutput, 0.1);
-    left.set(ControlMode.PercentOutput, -0.1);
+  public void shoot(double speed) {
+    right.set(ControlMode.PercentOutput, -speed);
+    left.set(ControlMode.PercentOutput, speed);
 
   }
 

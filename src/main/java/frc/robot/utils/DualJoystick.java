@@ -33,6 +33,10 @@ public class DualJoystick extends GenericHID {
 	}
 
 	public double getSlowMode() {
+		return (this.getLeftRawAxis(Constants.DualJoystick.DIAL) * -1 + 1) / 2;
+	}
+
+	public double getAirplaneSpeed() {
 		return (this.getRightRawAxis(Constants.DualJoystick.DIAL) * -1 + 1) / 2;
 	}
 }

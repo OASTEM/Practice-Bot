@@ -6,15 +6,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.AirplaneLauncher;
+import frc.robot.utils.DualJoystick;
 
 public class ShootAirplane extends CommandBase {
   AirplaneLauncher airplaneLauncher;
-
+  DualJoystick joysticks;
   /** Creates a new ShootAirplane. */
-  public ShootAirplane(AirplaneLauncher airplaneLauncher) {
+  public ShootAirplane(AirplaneLauncher airplaneLauncher, DualJoystick joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(airplaneLauncher);
     this.airplaneLauncher = airplaneLauncher;
+    this.joysticks = joystick;
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +27,8 @@ public class ShootAirplane extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    airplaneLauncher.shoot();
+    double speed =  joysticks.getAirplaneSpeed();
+    airplaneLauncher.shoot(speed);
   }
 
   // Called once the command ends or is interrupted.
